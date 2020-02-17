@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>权限管理</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link rel="stylesheet" href="/resources/layui/css/layui.css" media="all">
+    <!-- 注意：如果你直接复制所有代码到本地，上述css路径需要改成你本地的 -->
+    <style>
+        iframe {
+            height: 572PX;
+            width: 100%;
+            border-style: solid;
+            border-width: 1px;
+            border-top: none;
+            border-bottom: none;
+        }
+    </style>
+</head>
+<body class="childrenBody">
+<div class="layui-fluid">
+    <div class="layui-row">
+        <div class="layui-col-lg2">
+            <iframe src="/sys/toPermissionLeft"
+                    style="border-left: none;" name="left"></iframe>
+        </div>
+        <div class="layui-col-lg10">
+            <iframe src="/sys/toPermissionRight"
+                    style="border-right: none;" name="right"></iframe>
+        </div>
+    </div>
+</div>
+</body>
+</html>

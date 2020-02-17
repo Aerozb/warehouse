@@ -1,0 +1,62 @@
+debug:
+  true
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/warehouse?serverTimezone=GMT%2B8
+    username: root
+    password: 123456
+    type: com.alibaba.druid.pool.DruidDataSource
+    druid:
+      initialSize: 5
+      minIdle: 5
+      maxActive: 20
+      maxWait: 60000
+      timeBetweenEvictionRunsMillis: 60000
+      minEvictableIdleTimeMillis: 300000
+      validationQuery: SELECT 1 FROM DUAL
+      testWhileIdle: true
+      testOnBorrow: false
+      testOnReturn: false
+      poolPreparedStatements: true
+      filters: stat,wall
+      maxPoolPreparedStatementPerConnectionSize: 20
+      useGlobalDataSourceStat: true
+      connectionProperties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=500
+
+  jackson:
+    #\u4FEE\u6539\u65F6\u533A\u4E3A\u4E2D\u56FD\uFF0C\u5426\u5219\u4F1A\u67098\u5C0F\u65F6\u8BEF\u5DEE
+    time-zone: GMT+8
+    #\u4E3A\u7A7A\u5C31\u4E0D\u5E8F\u5217\u5316
+    default-property-inclusion: non_null
+    date-format: yyyy-MM-dd HH:mm:ss
+  thymeleaf:
+    #\u6A21\u677F\u7684\u6A21\u5F0F\uFF0C\u652F\u6301 HTML, XML TEXT JAVASCRIPT
+    mode: HTML5
+    #\u7F16\u7801 \u53EF\u4E0D\u7528\u914D\u7F6E
+    encoding: UTF-8
+    #\u5F00\u53D1\u914D\u7F6E\u4E3Afalse,\u907F\u514D\u4FEE\u6539\u6A21\u677F\u8FD8\u8981\u91CD\u542F\u670D\u52A1\u5668
+    cache: false
+mybatis-plus:
+  typeAliasesPackage: com.yhy.sys.domain,com.yhy.bus.domain
+  mapper-locations: classpath:mapper/*/*Mapper.xml
+  global-config:
+    db-config:
+      id-type: auto
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+#shiro\u7684\u914D\u7F6E,\u81EA\u5B9A\u4E49\u7684
+shiro:
+  hash-algorithm-name: md5
+  hash-iterations: 2
+  anon-urls:
+    - /index.html*
+    - /sys/toLogin*
+    - /login/login*
+    - /resources/**
+  login-url: /sys/toLogin
+  log-out-url: /login/logout*
+  authc-ulrs:
+    - /**
+filepath: /opt/java-porject/upload/
+
