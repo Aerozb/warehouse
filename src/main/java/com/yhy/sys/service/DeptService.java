@@ -3,8 +3,6 @@ package com.yhy.sys.service;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.yhy.sys.domain.Dept;
 
-import java.io.Serializable;
-
 /**
  * <p>
  * 服务类

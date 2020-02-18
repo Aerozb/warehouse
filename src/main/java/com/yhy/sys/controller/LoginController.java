@@ -1,7 +1,6 @@
 package com.yhy.sys.controller;
 
 
-import cn.hutool.core.thread.ThreadUtil;
 import com.yhy.sys.common.ActiverUser;
 import com.yhy.sys.common.LoginfoSender;
 import com.yhy.sys.common.ResultObj;

@@ -39,9 +39,9 @@ public class RoleServiceImpl extends ServiceImpl<RoleMapper, Role> implements Ro
         RoleMapper roleMapper = this.getBaseMapper();
         //根据rid删除sys_role_permission
         roleMapper.deleteRolePermissionByRid(roleId);
-        if(ids!=null&&ids.length>0) {
+        if (ids != null && ids.length > 0) {
             for (Integer pid : ids) {
-                roleMapper.saveRolePermission(roleId,pid);
+                roleMapper.saveRolePermission(roleId, pid);
             }
         }
     }

@@ -1,11 +1,11 @@
 package com.yhy.bus.service;
 
-import com.yhy.bus.domain.Goods;
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.yhy.bus.domain.Goods;
 
 /**
  * <p>
- *  服务类
+ * 服务类
  * </p>
  *
  * @author ${author}

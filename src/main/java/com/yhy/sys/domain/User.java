@@ -1,7 +1,6 @@
 package com.yhy.sys.domain;
 
 import com.baomidou.mybatisplus.annotation.TableField;
-import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -61,12 +60,12 @@ public class User implements Serializable {
     /**
      * 领导名称
      */
-    @TableField(exist=false)
+    @TableField(exist = false)
     private String leadername;
     /**
      * 部门名称
      */
-    @TableField(exist=false)
+    @TableField(exist = false)
     private String deptname;
 
 }

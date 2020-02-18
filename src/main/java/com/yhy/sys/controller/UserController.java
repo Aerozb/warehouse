@@ -18,12 +18,9 @@ import com.yhy.sys.vo.UserVo;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.shiro.crypto.hash.Md5Hash;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.cache.annotation.Cacheable;
-import org.springframework.context.annotation.Lazy;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -116,7 +113,7 @@ public class UserController {
     public ResultObj addUser(UserVo userVo) {
         try {
             userVo.setHiredate(new Date());
-            String salt=IdUtil.fastSimpleUUID();
+            String salt = IdUtil.fastSimpleUUID();
             String pwd = new Md5Hash(Constast.USER_DEFAULT_PWD, salt, 2).toString();
             userVo.setType(Constast.USER_TYPE_NORMAL);
             userVo.setSalt(salt);
@@ -164,16 +161,16 @@ public class UserController {
             return ResultObj.DELETE_ERROR;
         }
     }
-    
+
     /**
      * 重置用户密码
      */
     @RequestMapping("resetPwd")
     public ResultObj resetPwd(Integer id) {
         try {
-            User user=new User();
+            User user = new User();
             user.setId(id);
-            String salt=IdUtil.simpleUUID().toUpperCase();
+            String salt = IdUtil.simpleUUID().toUpperCase();
             user.setSalt(salt);//设置盐
             user.setPwd(new Md5Hash(Constast.USER_DEFAULT_PWD, salt, 2).toString());//设置密码
             this.userService.updateById(user);
@@ -183,24 +180,25 @@ public class UserController {
             return ResultObj.RESET_ERROR;
         }
     }
+
     /**
      * 根据用户ID查询角色并选中已拥有的角色
      */
     @RequestMapping("initRoleByUserId")
     public DataGridView initRoleByUserId(Integer id) {
         //1,查询所有可用的角色
-        QueryWrapper<Role> queryWrapper=new QueryWrapper<>();
+        QueryWrapper<Role> queryWrapper = new QueryWrapper<>();
         queryWrapper.eq("available", Constast.AVAILABLE_TRUE);
         List<Map<String, Object>> listMaps = this.roleService.listMaps(queryWrapper);
 
         //2,查询当前用户拥有的角色ID集合
-        List<Integer> currentUserRoleIds=this.roleService.queryUserRoleIdsByUid(id);
+        List<Integer> currentUserRoleIds = this.roleService.queryUserRoleIdsByUid(id);
         for (Map<String, Object> map : listMaps) {
-            Boolean LAY_CHECKED=false;
-            Integer roleId=(Integer) map.get("id");
+            Boolean LAY_CHECKED = false;
+            Integer roleId = (Integer) map.get("id");
             for (Integer rid : currentUserRoleIds) {
-                if(rid.equals(roleId)) {
-                    LAY_CHECKED=true;
+                if (rid.equals(roleId)) {
+                    LAY_CHECKED = true;
                     break;
                 }
             }
@@ -213,9 +211,9 @@ public class UserController {
      * 保存用户和角色的关系
      */
     @RequestMapping("saveUserRole")
-    public ResultObj saveUserRole(Integer uid,Integer[] ids) {
+    public ResultObj saveUserRole(Integer uid, Integer[] ids) {
         try {
-            this.userService.saveUserRole(uid,ids);
+            this.userService.saveUserRole(uid, ids);
             return ResultObj.DISPATCH_SUCCESS;
         } catch (Exception e) {
             e.printStackTrace();

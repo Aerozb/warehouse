@@ -95,7 +95,7 @@ public class GoodsController {
     public ResultObj deleteGoods(Integer id, String goodsimg) {
         try {
             //删除原文件
-			MyFileUtil.removeFileByPath(goodsimg);
+            MyFileUtil.removeFileByPath(goodsimg);
             this.goodsService.removeById(id);
             return ResultObj.DELETE_SUCCESS;
         } catch (Exception e) {

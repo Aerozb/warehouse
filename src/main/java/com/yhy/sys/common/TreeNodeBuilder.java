@@ -24,18 +24,19 @@ public class TreeNodeBuilder {
 //        }
 //        return nodes;
 //    }
+
     /**
      * 通过递归把没有层级关系的集合变成有层级关系的
      *
      * @param originalTreeNodes 传进来还没转换的菜单
-     * @param pid     父节点
+     * @param pid               父节点
      * @return
      */
     public static List<TreeNode> build(List<TreeNode> originalTreeNodes, Integer pid) {
         //对于递归调用来说是定义一个保存子菜单的list
         //因为是new的，每次递归都会生成新的，来保存当前查询的子菜单，返回给上一层递归调用
         //对调用这个方法的用户来说，返回的就是结果
-        List<TreeNode> treeNodes= new ArrayList<>();
+        List<TreeNode> treeNodes = new ArrayList<>();
         //循环
         for (TreeNode o : originalTreeNodes) {
             //找到父节点为pid的菜单对象

@@ -50,17 +50,17 @@ public class UserRealm extends AuthorizingRealm {
             //查询当前用户拥有的角色
             Integer userId = user.getId();
             List<Integer> rids = roleService.queryUserRoleIdsByUid(userId);
-            QueryWrapper<Role> wrapper=new QueryWrapper<>();
-            wrapper.in("id",rids);
+            QueryWrapper<Role> wrapper = new QueryWrapper<>();
+            wrapper.in("id", rids);
             List<Role> roles = roleService.list(wrapper);
-            List<String> roleNames=new ArrayList<>();
+            List<String> roleNames = new ArrayList<>();
             for (Role role : roles) {
                 roleNames.add(role.getName());
             }
             activerUser.setRoles(roleNames);
             //查询当前用户拥有的权限
             List<Permission> permissions = permissionService.queryUserMenuAndPermissionByUserId(userId, Constast.TYPE_PERMISSION);
-            List<String> permissionNames=new ArrayList<>();
+            List<String> permissionNames = new ArrayList<>();
             for (Permission permission : permissions) {
                 permissionNames.add(permission.getPercode());
             }
@@ -80,17 +80,16 @@ public class UserRealm extends AuthorizingRealm {
      */
     @Override
     protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principals) {
-        SimpleAuthorizationInfo info=new SimpleAuthorizationInfo();
-        ActiverUser activerUser=(ActiverUser) principals.getPrimaryPrincipal();
-        User user=activerUser.getUser();
+        SimpleAuthorizationInfo info = new SimpleAuthorizationInfo();
+        ActiverUser activerUser = (ActiverUser) principals.getPrimaryPrincipal();
+        User user = activerUser.getUser();
         List<String> permissions = activerUser.getPermissions();
         List<String> roles = activerUser.getRoles();
-        if(user.getType().equals(Constast.USER_TYPE_SUPER)) {
+        if (user.getType().equals(Constast.USER_TYPE_SUPER)) {
             info.addStringPermission("*:*");
             info.addRole("*");
-        }
-        else {
-            if(CollectionUtil.isNotEmpty(permissions)){
+        } else {
+            if (CollectionUtil.isNotEmpty(permissions)) {
                 info.addStringPermissions(permissions);
                 info.addRoles(roles);
             }

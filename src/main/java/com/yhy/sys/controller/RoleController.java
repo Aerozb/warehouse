@@ -4,7 +4,10 @@ package com.yhy.sys.controller;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.yhy.sys.common.*;
+import com.yhy.sys.common.DataGridView;
+import com.yhy.sys.common.ResultObj;
+import com.yhy.sys.common.TreeNode;
+import com.yhy.sys.common.WebUtils;
 import com.yhy.sys.domain.Permission;
 import com.yhy.sys.domain.Role;
 import com.yhy.sys.domain.User;
@@ -16,9 +19,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.io.Serializable;
 import java.time.LocalDateTime;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @author ${author}
@@ -40,7 +43,7 @@ public class RoleController {
         IPage<Role> page = new Page<>(roleVo.getPage(), roleVo.getLimit());
         wrapper.like(StringUtils.isNotBlank(roleVo.getName()), "name", roleVo.getName());
         wrapper.like(StringUtils.isNotBlank(roleVo.getRemark()), "remark", roleVo.getRemark());
-        wrapper.eq(roleVo.getAvailable()!=null, "available", roleVo.getAvailable());
+        wrapper.eq(roleVo.getAvailable() != null, "available", roleVo.getAvailable());
         roleService.page(page, wrapper);
         return new DataGridView(page.getTotal(), page.getRecords());
     }
@@ -85,25 +88,26 @@ public class RoleController {
         List<Integer> pids = roleService.queryRolePermissionIdsByRid(roleId);
         List<TreeNode> treeNodes = new ArrayList<>();
         for (Permission permission : permissionAll) {
-            String checkArr="0";
+            String checkArr = "0";
             for (Integer pid : pids) {
-                if (permission.getId().equals(pid)){
-                    checkArr="1";
+                if (permission.getId().equals(pid)) {
+                    checkArr = "1";
                     break;
                 }
             }
             Boolean spread = permission.getOpen() == 1 ? true : false;
-            treeNodes.add(new TreeNode(permission.getId(), permission.getPid(), permission.getTitle(), spread,checkArr));
+            treeNodes.add(new TreeNode(permission.getId(), permission.getPid(), permission.getTitle(), spread, checkArr));
         }
         return new DataGridView(treeNodes);
     }
+
     /**
      * 保存角色和菜单权限之间的关系
      */
     @RequestMapping("/saveRolePermission")
-    public ResultObj saveRolePermission(Integer rid,Integer[] ids) {
+    public ResultObj saveRolePermission(Integer rid, Integer[] ids) {
         try {
-            this.roleService.saveRolePermission(rid,ids);
+            this.roleService.saveRolePermission(rid, ids);
             return ResultObj.DISPATCH_SUCCESS;
         } catch (Exception e) {
             e.printStackTrace();

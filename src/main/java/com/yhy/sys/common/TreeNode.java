@@ -17,6 +17,7 @@ public class TreeNode {
     private Boolean spread;
     private List<TreeNode> children = new ArrayList<TreeNode>();
     private String checkArr;
+
     /**
      * 首页左边导航树的构造器
      */
@@ -43,6 +44,7 @@ public class TreeNode {
 
     /**
      * dTree复选树的构造器
+     *
      * @param id
      * @param pid
      * @param title

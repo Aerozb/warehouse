@@ -17,6 +17,7 @@ public interface RoleService extends IService<Role> {
 
     /**
      * 根据角色ID查询当前角色拥有的所有的权限或菜单ID
+     *
      * @param roleId
      * @return
      */
@@ -24,6 +25,7 @@ public interface RoleService extends IService<Role> {
 
     /**
      * 保存角色和菜单权限之间的关系
+     *
      * @param roleId
      * @param ids
      */
@@ -31,6 +33,7 @@ public interface RoleService extends IService<Role> {
 
     /**
      * 查询当前用户拥有的角色ID集合
+     *
      * @param id
      * @return
      */

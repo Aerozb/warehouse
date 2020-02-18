@@ -5,12 +5,10 @@ import com.yhy.sys.domain.User;
 import com.yhy.sys.mapper.RoleMapper;
 import com.yhy.sys.mapper.UserMapper;
 import com.yhy.sys.service.UserService;
-import org.springframework.aop.framework.AopContext;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.CachePut;
 import org.springframework.cache.annotation.Cacheable;
-import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -28,13 +26,13 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
     private RoleMapper roleMapper;
 
     @Override
-    @CachePut(cacheNames="user",key = "#user.id")
+    @CachePut(cacheNames = "user", key = "#user.id")
     public boolean updateById(User user) {
         return super.updateById(user);
     }
 
     @Override
-    @Cacheable(cacheNames = "user", key = "#id",unless="#result == null")
+    @Cacheable(cacheNames = "user", key = "#id", unless = "#result == null")
     public User getById(Serializable id) {
         return super.getById(id);
     }
@@ -52,9 +50,9 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
     public void saveUserRole(Integer uid, Integer[] ids) {
         //根据用户ID删除sys_role_user里面的数据
         this.roleMapper.deleteRoleUserByUid(uid);
-        if(null!=ids&&ids.length>0) {
+        if (null != ids && ids.length > 0) {
             for (Integer rid : ids) {
-                this.roleMapper.insertUserRole(uid,rid);
+                this.roleMapper.insertUserRole(uid, rid);
             }
         }
     }

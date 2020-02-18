@@ -1,11 +1,11 @@
 package com.yhy.bus.mapper;
 
-import com.yhy.bus.domain.Goods;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.yhy.bus.domain.Goods;
 
 /**
  * <p>
- *  Mapper 接口
+ * Mapper 接口
  * </p>
  *
  * @author ${author}

@@ -18,13 +18,13 @@ public class MyFileUtil {
     /**
      * 文件上传的保存路径,给个默认值
      */
-    public static String UPLOAD_PATH=System.getProperty("user.dir") + File.separator + "upload" + File.separator;
+    public static String UPLOAD_PATH = System.getProperty("user.dir") + File.separator + "upload" + File.separator;
 
     /**
      * 图片保存的公共路径
      * D:/JAVA_Project/IDEA/warehouse/upload/
      */
-    public static String IMAGE_DIRECTORY = "file:" + UPLOAD_PATH ;
+    public static String IMAGE_DIRECTORY = "file:" + UPLOAD_PATH;
 
     /**
      * 读取yml里的属性值
@@ -51,6 +51,7 @@ public class MyFileUtil {
 
     /**
      * 保存文件,返回图片所在目录和图片自己
+     *
      * @return 如2020-02-12/54255afd988f47648cd8a6675ae8c55c.jpg
      */
     public static String save(FileInputStream fis, String fileName) {
@@ -64,7 +65,7 @@ public class MyFileUtil {
         String publicPath = null;
         try {
             selfPath = DateUtil.today() + "/" + fileName;
-            publicPath = MyFileUtil.UPLOAD_PATH+selfPath;
+            publicPath = MyFileUtil.UPLOAD_PATH + selfPath;
             //如不存在则创建目录及文件
             FileUtil.touch(publicPath);
             fos = new FileOutputStream(publicPath);
@@ -84,9 +85,10 @@ public class MyFileUtil {
 
     /**
      * 根据路径删除图片
+     *
      * @param oldPath
      */
     public static void removeFileByPath(String oldPath) {
-           FileUtil.del(UPLOAD_PATH+oldPath);
+        FileUtil.del(UPLOAD_PATH + oldPath);
     }
 }

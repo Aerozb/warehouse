@@ -52,11 +52,11 @@ public class CacheAspect {
             //从缓存里面取
             depts = CACHE_CONTAINER_LIST.get(CACHE_DEPT_PROFIX + ALL);
             if (CollectionUtil.isNotEmpty(depts)) {
-                System.out.println("我是从缓存中取的：集合"+depts.getClass().getSimpleName());
+                System.out.println("我是从缓存中取的：集合" + depts.getClass().getSimpleName());
             } else {
                 depts = (List<Dept>) joinPoint.proceed();
                 CACHE_CONTAINER_LIST.put(CACHE_DEPT_PROFIX + ALL, depts);
-                System.out.println("我是数据库中取的：集合"+depts.getClass().getSimpleName());
+                System.out.println("我是数据库中取的：集合" + depts.getClass().getSimpleName());
             }
         } catch (Throwable throwable) {
             throwable.printStackTrace();
@@ -75,7 +75,7 @@ public class CacheAspect {
                 //从缓存里删除
                 CACHE_CONTAINER_LIST.remove(CACHE_DEPT_PROFIX + ALL);
                 CACHE_CONTAINER_ONE.remove(CACHE_DEPT_PROFIX + dept.getId());
-                System.out.println("我从缓存中更新或添加了dept："+dept.getId()+"和集合");
+                System.out.println("我从缓存中更新或添加了dept：" + dept.getId() + "和集合");
             }
         } catch (Throwable throwable) {
             throwable.printStackTrace();
@@ -94,7 +94,7 @@ public class CacheAspect {
                 //从缓存里删除
                 CACHE_CONTAINER_LIST.remove(CACHE_DEPT_PROFIX + ALL);
                 CACHE_CONTAINER_ONE.remove(CACHE_DEPT_PROFIX + deptId);
-                System.out.println("我从缓存中删除了dept："+deptId+"和集合");
+                System.out.println("我从缓存中删除了dept：" + deptId + "和集合");
             }
         } catch (Throwable throwable) {
             throwable.printStackTrace();
@@ -108,12 +108,12 @@ public class CacheAspect {
         Integer deptId = (Integer) joinPoint.getArgs()[0];
         Dept dept = CACHE_CONTAINER_ONE.get(CACHE_DEPT_PROFIX + deptId);
         if (dept != null) {
-            System.out.println("我是从缓存中取的：deptId="+dept.getId());
+            System.out.println("我是从缓存中取的：deptId=" + dept.getId());
         } else {
             try {
                 dept = (Dept) joinPoint.proceed();
                 CACHE_CONTAINER_ONE.put(CACHE_DEPT_PROFIX + dept.getId(), dept);
-                System.out.println("我是从数据库中取的：deptId="+dept.getId());
+                System.out.println("我是从数据库中取的：deptId=" + dept.getId());
             } catch (Throwable throwable) {
                 throwable.printStackTrace();
             }

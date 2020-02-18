@@ -15,6 +15,7 @@ public interface PermissionService extends IService<Permission> {
 
     /**
      * 查询用户拥有的菜单或权限
+     *
      * @param id 用户id
      */
     public List<Permission> queryUserMenuAndPermissionByUserId(Integer id, String type);

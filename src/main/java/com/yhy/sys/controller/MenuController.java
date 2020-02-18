@@ -40,7 +40,7 @@ public class MenuController {
         User user = (User) WebUtils.getSession().getAttribute("user");
         if (user.getType().equals(Constast.USER_TYPE_SUPER)) {
             menus = permissionService.list(wrapper);
-        }  else {
+        } else {
             //根据用户ID+角色+权限去查询
             menus = permissionService.queryUserMenuAndPermissionByUserId(user.getId(), TYPE_MNEU);
         }
