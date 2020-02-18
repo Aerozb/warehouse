@@ -59,8 +59,6 @@ public class UserController {
         queryWrapper.eq(userVo.getDeptid() != null, "deptid", userVo.getDeptid());
         this.userService.page(page, queryWrapper);
 
-        System.out.println("controller======"+userService.getClass().getSimpleName());
-
         List<User> list = page.getRecords();
         for (User user : list) {
             Integer deptid = user.getDeptid();

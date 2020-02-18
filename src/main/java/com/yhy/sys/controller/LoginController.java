@@ -1,7 +1,9 @@
 package com.yhy.sys.controller;
 
 
+import cn.hutool.core.thread.ThreadUtil;
 import com.yhy.sys.common.ActiverUser;
+import com.yhy.sys.common.LoginfoSender;
 import com.yhy.sys.common.ResultObj;
 import com.yhy.sys.common.WebUtils;
 import com.yhy.sys.domain.Loginfo;
@@ -27,6 +29,9 @@ public class LoginController {
     @Autowired
     private LoginfoService loginfoService;
 
+    @Autowired
+    private LoginfoSender loginfoSender;
+
     @RequestMapping("/login")
     public ResultObj login(String loginname, String pwd) {
         Subject subject = SecurityUtils.getSubject();
@@ -35,11 +40,13 @@ public class LoginController {
             subject.login(token);
             ActiverUser activerUser = (ActiverUser) subject.getPrincipal();
             WebUtils.getSession().setAttribute("user", activerUser.getUser());
+
             Loginfo loginfo = new Loginfo();
             loginfo.setLoginname(activerUser.getUser().getLoginname());
             loginfo.setLoginip(WebUtils.getRequest().getRemoteAddr());
             loginfo.setLogintime(new Date());
-            loginfoService.save(loginfo);
+            loginfoSender.sendMessage(loginfo);
+//            loginfoService.save(loginfo);
             return ResultObj.LOGIN_SUCCESS;
         } catch (AuthenticationException e) {
             e.printStackTrace();

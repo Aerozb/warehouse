@@ -42,7 +42,6 @@ public class UserRealm extends AuthorizingRealm {
      */
     @Override
     protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken token) throws AuthenticationException {
-        System.out.println("realm======"+userService.getClass().getSimpleName());
         QueryWrapper<User> queryWrapper = new QueryWrapper();
         User user = userService.getOne(queryWrapper.eq("loginname", token.getPrincipal()));
         if (user != null) {

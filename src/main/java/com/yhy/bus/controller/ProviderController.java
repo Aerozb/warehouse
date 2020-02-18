@@ -64,12 +64,6 @@ public class ProviderController {
         CacheManager cacheManager=new ConcurrentMapCacheManager();
         Collection<String> cacheNames = cacheManager.getCacheNames();
         ConcurrentMapCache cache = (ConcurrentMapCache) cacheManager.getCache("provider");
-        System.out.println(cache.getNativeCache());
-        System.out.println(cache.getName());
-        System.out.println(cache.get(1));
-        for (String cacheName : cacheNames) {
-            System.out.println("----------------------"+cacheName);
-        }
         return providerService.getById(id);
     }
 
