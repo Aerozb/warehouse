@@ -40,12 +40,15 @@ public class LoginController {
             ActiverUser activerUser = (ActiverUser) subject.getPrincipal();
             WebUtils.getSession().setAttribute("user", activerUser.getUser());
 
+            //登录日志对象生成
             Loginfo loginfo = new Loginfo();
             loginfo.setLoginname(activerUser.getUser().getLoginname());
             loginfo.setLoginip(WebUtils.getRequest().getRemoteAddr());
             loginfo.setLogintime(new Date());
+            //使用mq保存登陆日志
             loginfoSender.sendMessage(loginfo);
-//            loginfoService.save(loginfo);
+            //使用mq之前的方式
+            //loginfoService.save(loginfo);
             return ResultObj.LOGIN_SUCCESS;
         } catch (AuthenticationException e) {
             e.printStackTrace();
