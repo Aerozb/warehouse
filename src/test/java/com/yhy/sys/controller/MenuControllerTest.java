@@ -2,11 +2,9 @@ package com.yhy.sys.controller;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.yhy.sys.common.*;
 import com.yhy.sys.domain.Permission;
 import com.yhy.sys.domain.User;
-import com.yhy.sys.mapper.PermissionMapper;
 import com.yhy.sys.service.PermissionService;
 import com.yhy.sys.service.UserService;
 import org.junit.jupiter.api.Test;
@@ -15,8 +13,6 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
 class MenuControllerTest {

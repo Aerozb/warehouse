@@ -1,7 +1,5 @@
 package com.yhy.callback;
 
-import org.springframework.context.ApplicationContextAware;
-
 public class Printer {
 
 

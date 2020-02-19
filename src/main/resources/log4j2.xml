@@ -51,7 +51,13 @@
         <!--过滤掉spring和mybatis的一些无用的DEBUG信息-->
         <logger name="org.springframework" level="INFO"></logger>
         <logger name="org.mybatis" level="INFO"></logger>
-        <logger name="org.apache.activemq.ActiveMQSession" level="ERROR"></logger>
+<!--        <logger name="org.apache.activemq.ActiveMQSession" level="ERROR"></logger>-->
+        <!--
+        屏蔽
+        [11:09:37:951] [DEBUG] - org.apache.activemq.transport.AbstractInactivityMonitor$3.run(AbstractInactivityMonitor.java:150) - WriteChecker: 10009ms elapsed since last write check.
+        [11:09:37:952] [TRACE] - org.apache.activemq.transport.AbstractInactivityMonitor.writeCheck(AbstractInactivityMonitor.java:186) - tcp:///127.0.0.1:61616@54368 no message sent since last write check, sending a KeepAliveInfo
+        -->
+        <logger name="org.apache.activemq.transport.AbstractInactivityMonitor" level="ERROR"></logger>
         <root level="all">
             <appender-ref ref="Console"/>
             <appender-ref ref="RollingFileInfo"/>

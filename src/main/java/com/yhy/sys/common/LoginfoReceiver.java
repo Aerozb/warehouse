@@ -19,13 +19,16 @@ public class LoginfoReceiver {
     @Autowired
     private LoginfoService loginfoService;
 
-    @JmsListener(destination = "login-info")
+    @JmsListener(destination = "login-info", containerFactory = "myFactory")
     public void handle(Message message) {
         if (message instanceof ActiveMQObjectMessage) {
             ActiveMQObjectMessage activeMQObjectMessage = (ActiveMQObjectMessage) message;
             try {
+
                 Loginfo loginfo = (Loginfo) activeMQObjectMessage.getObject();
                 loginfoService.save(loginfo);
+                //手动确认消息，才不会出现bug也被消费
+                activeMQObjectMessage.acknowledge();
             } catch (JMSException e) {
                 e.printStackTrace();
             }
